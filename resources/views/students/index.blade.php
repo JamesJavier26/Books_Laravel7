@@ -10,6 +10,7 @@
             <div class="pull-left">
             </div>
             <div class="pull-right">
+            <a class="btn btn-success" href="{{ route('books.index') }}"> Book List</a>
                 <a class="btn btn-success" href="{{ route('students.create') }}"> Add New Student</a>
             </div>
         </div>
