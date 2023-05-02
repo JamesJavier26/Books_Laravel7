@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
-use App\Books;
+use App\Models\Books;
 
 class booksController extends Controller
 {
