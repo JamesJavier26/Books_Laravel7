@@ -13,17 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
 
-## View 
-Route::get('/books', 'booksController@index')->name('books');
-
-## Create
-Route::get('/books/create', 'booksController@create')->name('books.create');
-Route::post('/books/store', 'booksController@store')->name('books.store');
-
-## Update
-Route::get('/books/store/{id}', 'booksController@edit')->name('books.edit');
-Route::post('/books/update/{id}', 'booksController@update')->name('books.update');
-
-## Delete
-Route::get('/books/delete/{id}', 'booksController@destroy')->name('books.delete');
+Route::resource('books','booksController');

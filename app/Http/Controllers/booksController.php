@@ -10,79 +10,64 @@ use App\Models\Books;
 
 class booksController extends Controller
 {
-    public function index(){
-    $books = Books::select('id','name','description')->get();
-      return view('books.index')->with('books',$books);
-    }
 
-    public function create(){
+    public function index()
+    {
+        $books = Books::latest()->paginate(5);
+  
+        return view('books.index',compact('books'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
+            
+    }
+   
+
+    public function create()
+    {
         return view('books.create');
     }
 
-    public function store(Request $request){
-        $data = $request->except('_method','_token','submit');
-  
-        $validator = Validator::make($request->all(), [
-           'name' => 'required|string|min:3',
-           'description' => 'required|string|min:3',
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
         ]);
   
-        if ($validator->fails()) {
-           return redirect()->Back()->withInput()->withErrors($validator);
-        }
-  
-        if($record = Books::firstOrCreate($data)){
-           Session::flash('message', 'Added Successfully!');
-           Session::flash('alert-class', 'alert-success');
-           return redirect()->route('books');
-        }else{
-           Session::flash('message', 'Data not saved!');
-           Session::flash('alert-class', 'alert-danger');
-        }
-  
-        return Back();
-     }
-
-     public function edit($id){
-        $books = Books::find($id);
-  
-        return view('books.edit')->with('books',$books);
-     }
-
-     public function update(Request $request,$id){
-        $data = $request->except('_method','_token','submit');
-  
-        $validator = Validator::make($request->all(), [
-           'name' => 'required|string|min:3',
-           'description' => 'required|string|min:3',
-        ]);
-  
-        if ($validator->fails()) {
-           return redirect()->Back()->withInput()->withErrors($validator);
-        }
-        $books = Books::find($id);
-  
-        if($books->update($data)){
-  
-           Session::flash('message', 'Update successfully!');
-           Session::flash('alert-class', 'alert-success');
-           return redirect()->route('books');
-        }else{
-           Session::flash('message', 'Data not updated!');
-           Session::flash('alert-class', 'alert-danger');
-        }
-
-        return Back()->withInput();
+        Books::create($request->all());
+   
+        return redirect()->route('books.index')
+                        ->with('success','Book Listed successfully.');
     }
+   
 
-    // Delete
-   public function destroy($id){
-    Books::destroy($id);
-
-    Session::flash('message', 'Delete successfully!');
-    Session::flash('alert-class', 'alert-success');
-    return redirect()->route('books');
- }
-
+    public function show(Books $book)
+    {
+        return view('books.show',compact('book'));
+    }
+   
+    public function edit(Books $book)
+    {
+        return view('books.edit',compact('book'));
+    }
   
+    public function update(Request $request, Books $book)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+  
+        $book->update($request->all());
+  
+        return redirect()->route('books.index')
+                        ->with('success','Book updated successfully');
+    }
+  
+    public function destroy(Books $book)
+    {
+        $book->delete();
+  
+        return redirect()->route('books.index')
+                        ->with('success','Book deleted successfully');
+    }
 }

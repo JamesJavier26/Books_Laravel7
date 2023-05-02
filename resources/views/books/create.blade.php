@@ -7,57 +7,47 @@
 <h3>Add Book</h3>
 
 <div class="row">
-
-   <div class="col-md-12 col-sm-12 col-xs-12">
-
-     <!-- Alert message (start) -->
-     @if(Session::has('message'))
-     <div class="alert {{ Session::get('alert-class') }}">
-        {{ Session::get('message') }}
-     </div>
-     @endif 
-     <!-- Alert message (end) -->
-
-     <div class="actionbutton">
-
-        <a class='btn btn-info float-right' href="{{route('books')}}">List</a>
-
-     </div>
-
-     <form action="{{route('books.store')}}" method="post" >
-        {{csrf_field()}}
-
-        <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span></label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-             <input id="name" class="form-control col-md-12 col-xs-12" name="name" placeholder="Enter books name" required="required" type="text">
-
-             @if ($errors->has('name'))
-               <span class="errormsg">{{ $errors->first('name') }}</span>
-             @endif
-          </div>
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h2>Add New Book</h2>
         </div>
-
-        <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Description</label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-             <textarea name='description' id='description' class='form-control' placeholder="Enter description"></textarea>
-
-             @if ($errors->has('description'))
-                <span class="errormsg">{{ $errors->first('description') }}</span>
-             @endif
-          </div>
+        <div class="pull-right">
+            <a class="btn btn-primary" href="{{ route('books.index') }}"> Back</a>
         </div>
-
-        <div class="form-group">
-           <div class="col-md-6">
-
-              <input type="submit" name="submit" value='Submit' class='btn btn-success'>
-           </div>
-        </div>
-
-     </form>
-
-   </div>
+    </div>
 </div>
-@stop
+   
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+   
+<form action="{{ route('books.store') }}" method="POST">
+    @csrf
+  
+     <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Name:</strong>
+                <input type="text" name="name" class="form-control" placeholder="Name">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Detail:</strong>
+                <textarea class="form-control" style="height:150px" name="description" placeholder="Detail"></textarea>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+   
+</form>
+@endsection
