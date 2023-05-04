@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 use App\Models\Books;
+use App\Models\Students;
 
 class booksController extends Controller
 {
@@ -14,13 +15,11 @@ class booksController extends Controller
     public function index()
     {
         $books = Books::latest()->paginate(5);
-  
+        
         return view('books.index',compact('books'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
-            
+            ->with('i', (request()->input('page', 1) - 1) * 5);  
     }
    
-
     public function create()
     {
         return view('books.create');
@@ -43,6 +42,7 @@ class booksController extends Controller
     public function show(Books $book)
     {
         return view('books.show',compact('book'));
+
     }
    
     public function edit(Books $book)
