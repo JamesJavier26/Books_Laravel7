@@ -4,8 +4,6 @@
 <!-- Specify content -->
 @section('content')
 
-<h3>Add Student</h3>
-
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -36,6 +34,8 @@
             <div class="form-group">
                 <strong>Name:</strong>
                 <input type="text" name="name" class="form-control" placeholder="Name">
+                <strong>Book ID:</strong>
+                <input type="text" name="books_id" class="form-control" placeholder="Type in Book ID">
             </div>
         </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

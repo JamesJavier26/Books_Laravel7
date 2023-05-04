@@ -13,7 +13,8 @@ class StudentsSeeder extends Seeder
     public function run()
     {
         Students::create([
-            'name' => 'james'
+            'name' => 'james',
+            'books_id' => '1'
         ]);
     }
 }

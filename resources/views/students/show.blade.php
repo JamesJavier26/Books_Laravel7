@@ -10,13 +10,17 @@
             </div>
         </div>
     </div>
-   
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>
                 {{ $student->name }}
-                <strong>Book/s Related: </strong>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Book/s Related:</strong>
+                {{ $student->books->name }}
             </div>
         </div>
     </div>

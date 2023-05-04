@@ -4,8 +4,6 @@
 <!-- Specify content -->
 @section('content')
 
-<h3>Edit Book</h3>
-
 <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">

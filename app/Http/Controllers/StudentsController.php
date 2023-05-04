@@ -28,6 +28,7 @@ class StudentsController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'books_id' => 'required'
         ]);
   
         Students::create($request->all());
@@ -51,6 +52,7 @@ class StudentsController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'books_id' => 'required'
         ]);
   
         $student->update($request->all());

@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Students extends Model
 {
     protected $fillable = [
-        'name'
+        'name', 'books_id'
      ];
 
      public function books(){
-        return $this->belongsTo(Students::class,'book_id');
+        return $this->belongsTo(Students::class,'books_id');
     }  
 }
