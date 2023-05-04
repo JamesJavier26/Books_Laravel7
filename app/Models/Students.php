@@ -11,6 +11,7 @@ class Students extends Model
      ];
 
      public function books(){
+        
         return $this->belongsTo(Students::class,'books_id');
     }  
 }
