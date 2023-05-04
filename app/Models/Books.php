@@ -10,7 +10,5 @@ class Books extends Model
         'name','description' 
      ];
 
-    public function students(){
-        return $this->hasOne(Books::class,'books_id');
-    } 
+
 }

@@ -34,6 +34,8 @@
                 <div class="form-group">
                     <strong>Name:</strong>
                     <input type="text" name="name" value="{{ $student->name }}" class="form-control" placeholder="Name">
+                    <strong>Book ID:</strong>
+                    <input type="text" name="books_id" value="{{ $student->books_id }}" class="form-control" placeholder="Type in Book ID">
             </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

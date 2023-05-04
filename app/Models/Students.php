@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Books;
 
 class Students extends Model
 {
@@ -11,7 +12,8 @@ class Students extends Model
      ];
 
      public function books(){
-        
-        return $this->belongsTo(Students::class,'books_id');
+
+        return $this->belongsTo(Books::class);
+
     }  
 }
